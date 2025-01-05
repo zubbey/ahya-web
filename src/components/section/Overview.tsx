@@ -16,6 +16,8 @@ import { Line } from "react-chartjs-2";
 import Image from "next/image";
 import Icon from "@/components/icon";
 import useSnapshot from "@/hooks/useSnapshot";
+import { fCurrency } from "@/utils/formatNumber";
+import User from "@/models/user";
 
 ChartJS.register(
   CategoryScale,
@@ -41,6 +43,8 @@ export const options = {
   },
 };
 
+const pointRate = 600;
+
 function Overview() {
   const users = useSnapshot("users");
 
@@ -60,6 +64,10 @@ function Overview() {
         fill: true,
       },
     ],
+  };
+
+  const getAmount = (item: User): string => {
+    return fCurrency(item.point * pointRate);
   };
 
   return (
@@ -88,7 +96,10 @@ function Overview() {
                 />
                 <p>{`${user.userName} (${user.point})`}</p>
               </div>
-              <Icon name="ic:round-arrow-forward-ios" />
+              <div>
+                <p>{getAmount(user)}</p>
+                <Icon name="ic:round-arrow-forward-ios" />
+              </div>
             </div>
           </Link>
         ))}

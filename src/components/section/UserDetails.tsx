@@ -1,11 +1,17 @@
 "use client";
+import { fCurrency } from "@/utils/formatNumber";
 // import { useEffect, useState } from "react";
 // import { collection, getDocs, query, where } from "firebase/firestore";
 import Chip from "../chip";
 import User from "@/models/user";
+import { useMemo } from "react";
 // import { db } from "@/firebase";
 
+const pointRate = 600;
+
 function UserDetails({ user }: Readonly<{ user: User }>) {
+  const amount = useMemo(() => user.point & pointRate, [user]);
+
   return (
     <div className="container mx-auto p-6 bg-gradient-to-r from-gray-900 via-gray-800 to-black text-gray-100 rounded-lg shadow-lg">
       <h1 className="text-3xl font-bold mb-6">
@@ -22,8 +28,9 @@ function UserDetails({ user }: Readonly<{ user: User }>) {
             <strong>Status:</strong>{" "}
             <Chip text={user?.status ?? ""} type={user?.status ?? ""} />
           </p>
-          <p>
+          <p className="flex gap-2 items-center">
             <strong>Active Points:</strong> {user?.point}
+            <strong>{fCurrency(amount)}</strong>
           </p>
           <p>
             <strong>Joined:</strong>{" "}
