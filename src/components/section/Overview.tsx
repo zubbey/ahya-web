@@ -96,7 +96,7 @@ function Overview() {
                 />
                 <p>{`${user.userName} (${user.point})`}</p>
               </div>
-              <div>
+              <div className="flex gap-2 items-center">
                 <p>{getAmount(user)}</p>
                 <Icon name="ic:round-arrow-forward-ios" />
               </div>

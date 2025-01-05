@@ -10,7 +10,7 @@ import { useMemo } from "react";
 const pointRate = 600;
 
 function UserDetails({ user }: Readonly<{ user: User }>) {
-  const amount = useMemo(() => user.point & pointRate, [user]);
+  const amount = useMemo(() => user.point * pointRate, [user]);
 
   return (
     <div className="container mx-auto p-6 bg-gradient-to-r from-gray-900 via-gray-800 to-black text-gray-100 rounded-lg shadow-lg">
